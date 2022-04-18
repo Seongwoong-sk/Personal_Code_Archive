@@ -36,3 +36,31 @@ _base_ = [
     '../_base_/schedules/schedule_1x.py', '../_base_/default_runtime.py'
 ]
 '''
+
+
+# Inference
+
+img = '/content/mmdetection/demo/demo.jpg'
+# inference_detector의 인자로 string(file 절대경로), ndarray가 단일 또는 list형태로 입력 될 수 있음. 
+results = inference_detector(model, img)
+
+# type(results) : list
+# len(results) : 80 --> coco datasets이라서 80개
+type(results), len(results)
+
+'''
+result 해석
+results는 list형으로 coco class의  0부터 79까지 class_id별로 80개의 array를 가짐. 
+-> 개별 array들은 각 클래스별로 5개의 값(좌표값과 class별로 confidence)을 가짐. 개별 class별로 여러개의 좌표를 가지면 여러개의 array가 생성됨. 
+-> 좌표는 좌상단(xmin, ymin), 우하단(xmax, ymax) 기준. 
+-> 개별 array의 shape는 (Detection된 object들의 수, 5(좌표와 confidence)) 임 --> xmin, ymin, xmax, ymax, confidence (obj 1개에 대한)
+-> class id는 자동으로 할당이 됨 (리스트안에 있는  array 인덱스에 따라)
+'''
+
+
+# 모델과 이미지,결과를 입력하면 자동으로 그림을 그려주는 유틸리티
+from mmdet.apis import show_result_pyplot
+
+# inference 된 결과를 원본 이미지에 적용하여 새로운 image로 생성(bbox 처리된 image)
+# Default로 score threshold가  0.3 이상인 Object들만 시각화 적용. show_result_pyplot은 model.show_result()를 호출. 
+show_result_pyplot(model, img, results)
