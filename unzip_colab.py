@@ -4,7 +4,7 @@ drive.mount('/content/drive')
 
 # 경로 이동
 %cd /content/drive/MyDrive/------
-!unzip -qq "zip 파일 경로"
+!unzip -qq "zip 파일 경로" -d "압축 풀 경로"
 
 # 업로드가 잘 됐는지 파일 개수로 확인
 from glob import glob
