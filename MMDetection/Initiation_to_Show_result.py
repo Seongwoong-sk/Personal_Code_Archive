@@ -40,8 +40,14 @@ _base_ = [
 
 # Inference
 
+'''
+Imge array를 inference_detector()에 입력할 경우에는 원본 array를 BGR 형태로 입력 필요
+(RGB 변환은 내부에서 수행하므로 BGR로 입력 필요)
+'''
+
 img = '/content/mmdetection/demo/demo.jpg'
 # inference_detector의 인자로 string(file 절대경로), ndarray가 단일 또는 list형태로 입력 될 수 있음. 
+
 results = inference_detector(model, img)
 
 # type(results) : list
