@@ -188,3 +188,5 @@ class KittyTinyDataset(CustomDataset): # CustomDataset 상속받음
     return data_infos # 리스트 객체
 
                
+# train_ds = KittyTinyDataset(data_root='/content/data', ann_file='train.txt', img_prefix='images')
+# print(train_ds.data_infos[:10])
