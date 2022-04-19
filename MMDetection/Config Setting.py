@@ -101,9 +101,11 @@ cfg.work_dir = './tutorial_exps'
 
 # The Original lr is set for 8-GPU Training
 # We divide it by 8 since we only use one GPU
-cfg.optimizer.lr = 0.02 / 8
+cfg.optimizer.lr = 0.02 / 8 # task가 8개의 gpu 했을 때 설정
 cfg.lr_config.warmup = None
 cfg.log_config.interval = 10
+# cfg.runner.max_epochs = 5  # epoch를 5번만 돌릴 것임
+
 
 # config 수행 시마다 policy값이 없어지는 bug로 인하여 설정. 
 cfg.lr_config.policy = 'step'
@@ -116,6 +118,9 @@ cfg.evaluation.interval = 12
 
 # We can set the checkpoint saving interval to reduce the storage cost
 cfg.checkpoint_config.interval = 12
+
+# 학습 시 Batch size 설정(단일 GPU 별 Batch size로 설정됨)
+cfg.data.samples_per_gpu = 4 # 여기서 gpu가 2개면 4 x 2 = 8로 됨.
 
 # Set seed thus the results are more reproducible
 cfg.seed = 0
